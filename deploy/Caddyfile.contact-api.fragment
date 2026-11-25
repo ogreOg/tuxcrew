@@ -1,0 +1,15 @@
+# Replace only the existing tonrax.com site block with this block.
+tonrax.com {
+	encode gzip zstd
+
+	@tonrax_api path /api /api/* /healthz
+	handle @tonrax_api {
+		reverse_proxy tonrax-contact-api:8080 {
+			header_up X-Real-IP {http.request.remote.host}
+		}
+	}
+
+	handle {
+		reverse_proxy tonrax-frontend:8080
+	}
+}

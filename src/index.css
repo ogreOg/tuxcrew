@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+}
+
+:root {
+  --background: 240 10% 2%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 4%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 10% 2%;
+  --secondary: 240 5% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5% 15%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 220 80% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 10% 12%;
+  --input: 240 10% 12%;
+  --ring: 240 10% 84%;
+  --radius: 0.25rem;
+
+  --app-font-sans: 'Outfit', sans-serif;
+  --app-font-serif: 'Inter', sans-serif;
+  --app-font-mono: 'Space Mono', monospace;
+}
+
+.dark {
+  --background: 240 10% 2%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 4%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 10% 2%;
+  --secondary: 240 5% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5% 15%;
+  --muted-foreground: 240 5% 65%;
+  --accent: 220 80% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 10% 12%;
+  --input: 240 10% 12%;
+  --ring: 240 10% 84%;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+  }
+  
+  ::selection {
+    background: rgba(100, 150, 255, 0.3);
+  }
+
+  .launch-sequence-track {
+    --launch-line-x: 0.65rem;
+  }
+
+  .launch-sequence-line {
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.75rem;
+    left: var(--launch-line-x);
+    width: 1px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .launch-sequence-line-progress {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .launch-asteroid {
+    position: absolute;
+    left: 50%;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: -0.575rem 0 0 -0.575rem;
+    border-radius: 50%;
+    background: #080808;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 0.3rem rgba(255, 255, 255, 0.06), 0 0 1.25rem rgba(255, 255, 255, 0.28);
+    transform: translateY(-50%);
+  }
+
+  .launch-asteroid::before,
+  .launch-asteroid::after {
+    content: '';
+    position: absolute;
+    width: 0.3rem;
+    height: 0.18rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .launch-asteroid::before {
+    top: 0.2rem;
+    left: 0.2rem;
+  }
+
+  .launch-asteroid::after {
+    right: 0.15rem;
+    bottom: 0.2rem;
+    opacity: 0.45;
+  }
+
+  .launch-asteroid span {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 2.3rem;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+  }
+
+  @media (min-width: 768px) {
+    .launch-sequence-track {
+      --launch-line-x: 1.15rem;
+    }
+  }
+}

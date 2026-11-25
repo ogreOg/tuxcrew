@@ -1,0 +1,16 @@
+FROM golang:1.26-alpine AS build
+
+WORKDIR /src
+COPY go.mod go.sum ./
+COPY backend ./backend
+COPY cmd ./cmd
+RUN CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/contact-api ./cmd/contact-api \
+	&& CGO_ENABLED=0 go build -trimpath -ldflags='-s -w' -o /out/outbox-admin ./cmd/outbox-admin \
+	&& mkdir -p /out/varlib/tonrax \
+	&& chmod 0700 /out/varlib/tonrax
+
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY --from=build --chown=65532:65532 /out/contact-api /contact-api
+COPY --from=build --chown=65532:65532 /out/outbox-admin /outbox-admin
+COPY --from=build --chown=65532:65532 /out/varlib/tonrax /var/lib/tonrax
+ENTRYPOINT ["/contact-api"]

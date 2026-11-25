@@ -1,0 +1,50 @@
+services:
+  tonrax-frontend:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.frontend
+    container_name: tonrax-frontend
+    restart: unless-stopped
+    networks:
+      - proxy
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  tonrax-contact-api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.contact-api
+    container_name: tonrax-contact-api
+    restart: unless-stopped
+    env_file:
+      - /etc/tonrax-contact-api.env
+    environment:
+      CONTACT_LISTEN_ADDR: 0.0.0.0:8080
+      OUTBOX_DB_PATH: /var/lib/tonrax/outbox.db
+      OUTBOX_RETENTION_DAYS: 90
+      OUTBOX_MAX_BYTES: 536870912
+    networks:
+      - proxy
+    read_only: true
+    volumes:
+      - tonrax_outbox:/var/lib/tonrax
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  tonrax_outbox:
