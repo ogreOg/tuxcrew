@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none';" />
+    <title>Tonrax</title>
+    
+    <!-- Favicon with multiple sizes -->
+    <link rel="icon" href="src/pages/logo/64x64nb.png" type="image/png" />
+
+    <meta name="description" content="Tonrax — Web Development & Hosting Solutions" />
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Tonrax — Web Development & Hosting Solutions" />
+    <meta property="og:description" content="Tonrax — Web Development & Hosting Solutions" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tonrax — Web Development & Hosting Solutions" />
+    <meta name="twitter:description" content="Tonrax — Web Development & Hosting Solutions" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="file-guide" hidden>
+      <div class="guide-card">
+        <div class="guide-kicker">Tonrax — Web Development & Hosting Solutions</div>
+        <h1>Tonrax</h1>
+        <p>Web Development & Hosting Solutions</p>
+        <button onclick="window.location.href='START-WEBSITE.bat'">Start website automatically</button>
+        <p class="guide-small">If Windows blocks the button, double-click <strong>START-WEBSITE.bat</strong> in the project folder.</p>
+      </div>
+    </div>
+    <style>
+      #file-guide[hidden] { display: none; }
+      #file-guide {
+        min-height: 100vh; box-sizing: border-box; display: grid; place-items: center;
+        padding: 24px; color: #f7f7f8; background: #020203;
+        font-family: Arial, sans-serif;
+      }
+      .guide-card { width: min(560px, 100%); padding: 42px; border: 1px solid #25252a; background: rgba(255,255,255,.035); box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+      .guide-kicker { color: #8db5ff; font: 11px/1.5 monospace; letter-spacing: .2em; }
+      .guide-card h1 { margin: 24px 0 16px; font-size: clamp(34px, 7vw, 58px); line-height: .95; letter-spacing: -.05em; }
+      .guide-card p { color: #9c9ca5; font-size: 18px; line-height: 1.55; }
+      .guide-card button { margin-top: 18px; padding: 15px 20px; color: #050505; background: #fff; border: 0; cursor: pointer; font: 12px monospace; letter-spacing: .12em; text-transform: uppercase; }
+      .guide-card button:hover { background: #9fc1ff; }
+      .guide-small { margin-bottom: 0; font-size: 12px !important; }
+    </style>
+    <script>
+      if (window.location.protocol === 'file:') {
+        document.getElementById('file-guide').hidden = false;
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

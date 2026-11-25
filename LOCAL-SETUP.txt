@@ -1,0 +1,19 @@
+COSMIC WEB STUDIO — LOCAL SETUP
+
+1. Install Node.js 18 or newer from https://nodejs.org/
+2. Open a terminal in this folder — the folder containing package.json.
+3. Run:
+
+   npm install
+   npm run dev
+
+4. Open the URL shown in the terminal, usually:
+
+   http://localhost:5173/
+
+The applicant page is available at:
+
+   http://localhost:5173/apply
+
+Do not double-click index.html for the editable source. This is a React/Vite
+project and needs the Vite development server to compile and serve it.
